@@ -79,4 +79,17 @@ public class DHaromszog {
             throw new Exception(String.format("%d. sor: Az adatok nincsenek növekvő sorrandben!", sorSzama));
         }
     }
+
+    public double getKerulet() {
+        return aOldal + bOldal + cOldal;
+    }
+
+    public double getTerulet() {
+        return aOldal * bOldal / 2;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d. sor: a = %.2f b = %.2f c = %.2f", sorSzama, aOldal, bOldal, cOldal);
+    }
 }
