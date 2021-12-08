@@ -4,14 +4,20 @@ public class DHaromszog {
     private double aOldal;
     private double bOldal;
     private double cOldal;
+    private int sorSzama;
 
-    public DHaromszog(String sor, int sorSzam) throws Exception {
+    public DHaromszog(String sor, int sorSzama) throws Exception {
+        this.sorSzama = sorSzama;
         sor.replace(',', '.');
         String[] adatok = sor.split(" ");
 
         this.setaOldal(Double.parseDouble(adatok[0]));
         this.setbOldal(Double.parseDouble(adatok[1]));
         this.setcOldal(Double.parseDouble(adatok[2]));
+
+        EllNovekvoSorrend();
+        EllMegszerkesztheto();
+        EllDerekszogu();
     }
 
     public double getaOldal() {
@@ -50,7 +56,27 @@ public class DHaromszog {
         }
     }
 
-    private boolean EllDerekszogu() {
-        return Math.pow(aOldal, 2) + Math.pow(bOldal, 2) == Math.pow(cOldal, 2);
+    private boolean EllDerekszogu() throws Exception {
+        if (Math.pow(aOldal, 2) + Math.pow(bOldal, 2) == Math.pow(cOldal, 2)) {
+            return true;
+        } else {
+            throw new Exception(String.format("%d. sor: A háromszög nem derékszögű!", sorSzama));
+        }
+    }
+
+    private boolean EllMegszerkesztheto() throws Exception {
+        if (aOldal + bOldal > cOldal) {
+            return true;
+        } else {
+            throw new Exception(String.format("%d. sor: A háromszöget nem lehet megszerkeszteni!", sorSzama));
+        }
+    }
+
+    private boolean EllNovekvoSorrend() throws Exception {
+        if (aOldal <= bOldal && bOldal <= cOldal) {
+            return true;
+        } else {
+            throw new Exception(String.format("%d. sor: Az adatok nincsenek növekvő sorrandben!", sorSzama));
+        }
     }
 }
